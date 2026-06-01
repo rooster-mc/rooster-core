@@ -8,28 +8,23 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
-class RoosterCache<K, V>(cacheBuilder: CacheBuilder<Any, Any>, corePoolSize: Int = 1) {
+class RoosterCache<K, V : Any>(cacheBuilder: CacheBuilder<Any, Any>, corePoolSize: Int = 1) {
     private var cache: Cache<String, V> = cacheBuilder.build()
 
     private val generalKey = "general"
 
     fun getIfPresent(key: K, sender: CommandSender? = null): V? {
-        val typeKey = sender?.uniqueKey() ?: generalKey
-
-        return cache.getIfPresent("$typeKey;$key")
+        return cache.getIfPresent(combineKey(key, sender))
     }
 
     fun invalidate(key: K, sender: CommandSender? = null) {
-        val typeKey = sender?.uniqueKey() ?: generalKey
-        cache.invalidate("$typeKey;$key")
+        cache.invalidate(combineKey(key, sender))
     }
 
     private val scheduler: ScheduledExecutorService = Executors.newScheduledThreadPool(corePoolSize)
     fun invalidateWithTimeout(key: K, sender: CommandSender? = null, clearTime: Long, unit: TimeUnit) {
-        val typeKey = sender?.uniqueKey() ?: generalKey
-
         scheduler.schedule({
-            cache.invalidate(typeKey to key)
+            cache.invalidate(combineKey(key, sender))
         }, clearTime, unit)
     }
 
@@ -40,13 +35,12 @@ class RoosterCache<K, V>(cacheBuilder: CacheBuilder<Any, Any>, corePoolSize: Int
         clearTime: Long? = null,
         unit: TimeUnit = TimeUnit.SECONDS
     ) {
-        val typeKey = sender?.uniqueKey() ?: generalKey
-
-        cache.put("$typeKey;$key", value)
+        cache.put(combineKey(key, sender), value)
 
         if (clearTime != null) invalidateWithTimeout(key, sender, clearTime, unit)
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun <T : V> get(
         key: K,
         sender: CommandSender? = null,
@@ -54,14 +48,12 @@ class RoosterCache<K, V>(cacheBuilder: CacheBuilder<Any, Any>, corePoolSize: Int
         clearTime: Long? = null,
         unit: TimeUnit = TimeUnit.SECONDS
     ): T {
-        val typeKey = sender?.uniqueKey() ?: generalKey
-
         if (clearTime != null) invalidateWithTimeout(key, sender, clearTime, unit)
-        return cache.get("$typeKey;$key", provider) as T
+        return cache.get(combineKey(key, sender), provider) as T
     }
 
     fun size() = cache.size()
-    fun asMap() = cache.asMap()
+    fun asMap(): Map<String, V> = cache.asMap()
     fun addAll(
         map: Map<K, V>,
         sender: CommandSender? = null,
@@ -76,5 +68,10 @@ class RoosterCache<K, V>(cacheBuilder: CacheBuilder<Any, Any>, corePoolSize: Int
         cache.getAllPresent(keys.map {
             (sender?.uniqueKey() ?: generalKey) to it
         })
+    }
+
+    private fun combineKey(key: K, sender: CommandSender?): String {
+        val typeKey = sender?.uniqueKey() ?: generalKey
+        return "$typeKey;$key"
     }
 }

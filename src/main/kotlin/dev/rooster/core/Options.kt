@@ -34,6 +34,7 @@ abstract class RoosterSettings<T : WarningScaffold>(val warningList: List<T>) {
         return warnings[warningOption] ?: warningOption.defaultValue
     }
 
+    @Suppress("UNCHECKED_CAST")
     internal fun unsafeGetWarningOption(warningOption: WarningScaffold): Boolean {
         return warnings[warningOption as T] ?: warningOption.defaultValue
     }

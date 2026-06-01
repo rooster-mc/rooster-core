@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm")
 }
 
-group = "dev.cypdashuhn.rooster.common"
+group = "dev.rooster.core"
 version = "1.0-SNAPSHOT"
 
 repositories {

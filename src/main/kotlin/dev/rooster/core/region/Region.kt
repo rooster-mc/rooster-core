@@ -1,8 +1,8 @@
-package dev.cypdashuhn.rooster.common.region
+package dev.rooster.core.region
 
-import dev.cypdashuhn.rooster.common.util.Box
-import dev.cypdashuhn.rooster.common.util.toVector3d
-import dev.cypdashuhn.rooster.common.util.value
+import dev.rooster.core.util.Box
+import dev.rooster.core.util.toVector3d
+import dev.rooster.core.util.value
 import org.bukkit.Axis
 import org.bukkit.Chunk
 import org.bukkit.Location

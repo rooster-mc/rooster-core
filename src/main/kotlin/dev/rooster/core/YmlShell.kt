@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common
+package dev.rooster.core
 
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration

@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common.util
+package dev.rooster.core.util
 
 typealias PredicateCombinator<T> = ((T) -> Boolean, (T) -> Boolean) -> ((T) -> Boolean)
 

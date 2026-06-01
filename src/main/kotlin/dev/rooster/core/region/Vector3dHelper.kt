@@ -1,6 +1,6 @@
-package dev.cypdashuhn.rooster.common.region
+package dev.rooster.core.region
 
-import dev.cypdashuhn.rooster.common.util.toComponent
+import dev.rooster.core.util.toComponent
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 import org.joml.Vector3d

@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common
+package dev.rooster.core
 
 import kotlin.collections.set
 import kotlin.properties.ReadOnlyProperty

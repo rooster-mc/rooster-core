@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common.region
+package dev.rooster.core.region
 
 import org.bukkit.Axis
 

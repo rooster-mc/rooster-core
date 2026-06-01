@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common
+package dev.rooster.core
 
 import java.util.logging.Logger
 

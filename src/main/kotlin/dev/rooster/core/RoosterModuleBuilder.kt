@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common
+package dev.rooster.core
 
 import com.google.common.cache.CacheBuilder
 import org.bukkit.plugin.java.JavaPlugin

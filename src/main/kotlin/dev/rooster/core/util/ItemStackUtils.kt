@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common.util
+package dev.rooster.core.util
 
 import net.kyori.adventure.text.TextComponent
 import org.bukkit.Material

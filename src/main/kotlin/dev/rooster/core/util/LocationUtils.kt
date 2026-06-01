@@ -1,6 +1,6 @@
-package dev.cypdashuhn.rooster.common.util
+package dev.rooster.core.util
 
-import dev.cypdashuhn.rooster.common.region.Region
+import dev.rooster.core.region.Region
 import org.bukkit.Axis
 import org.bukkit.Location
 import org.bukkit.World

@@ -1,4 +1,4 @@
-package dev.cypdashuhn.rooster.common.util
+package dev.rooster.core.util
 
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerInteractEvent

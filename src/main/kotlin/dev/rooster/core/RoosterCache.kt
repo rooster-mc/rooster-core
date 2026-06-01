@@ -18,8 +18,6 @@ class RoosterCache<K, V>(cacheBuilder: CacheBuilder<Any, Any>, corePoolSize: Int
 
         return cache.getIfPresent("$typeKey;$key")
     }
-    //82d1a390-ffc5-4add-9e5e-0438d871e4c5;current_interface
-    //82d1a390-ffc5-4add-9e5e-0438d871e4c5;current_interface
 
     fun invalidate(key: K, sender: CommandSender? = null) {
         val typeKey = sender?.uniqueKey() ?: generalKey

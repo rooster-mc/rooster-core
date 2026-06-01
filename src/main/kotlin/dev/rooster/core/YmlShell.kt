@@ -24,7 +24,7 @@ interface YmlOperations {
          * Finds a file in the plugin folder. Note, use `.exists()` to check
          * whether that directory is filled.
          */
-        fun findFile(fileName: String, directory: String = "", baseDirectory: String = RoosterCommon.plugin.dataFolder.path): File {
+        fun findFile(fileName: String, directory: String = "", baseDirectory: String = RoosterCore.plugin.dataFolder.path): File {
             return File(baseDirectory, if (directory.isNotEmpty()) "$directory/$fileName" else fileName)
         }
 
@@ -54,7 +54,7 @@ interface YmlOperations {
     }
 }
 
-open class YmlShell(fileName: String, directory: String = "", baseDirectory: String = RoosterCommon.plugin.dataFolder.path) :
+open class YmlShell(fileName: String, directory: String = "", baseDirectory: String = RoosterCore.plugin.dataFolder.path) :
     YmlOperations {
     override val file = File(baseDirectory, if (directory.isNotEmpty()) "$directory/$fileName" else fileName)
     override val config: FileConfiguration by lazy { YamlConfiguration.loadConfiguration(file) }

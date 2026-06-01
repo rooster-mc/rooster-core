@@ -10,7 +10,7 @@ fun initRooster(
     cache: RoosterCache<String, Any> = RoosterCache(CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES)),
     block: RoosterModuleBuilder.() -> Unit = { }
 ) {
-    RoosterCommon.init(plugin)
+    RoosterCore.init(plugin)
     block(RoosterModuleBuilder(plugin, services, cache))
 }
 

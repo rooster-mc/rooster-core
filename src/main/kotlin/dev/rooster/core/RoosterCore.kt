@@ -5,7 +5,7 @@ import java.util.logging.Logger
 
 object RoosterCore {
     const val MODULE_NAME = "RoosterCore"
-    var logger: Logger = Logger.getLogger(moduleName)
+    var logger: Logger = Logger.getLogger(MODULE_NAME)
     private lateinit var pluginInst: JavaPlugin
     val plugin: JavaPlugin
         get() {

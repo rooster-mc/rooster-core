@@ -11,11 +11,15 @@ fun initRooster(
     block: RoosterModuleBuilder.() -> Unit = { }
 ) {
     RoosterCore.init(plugin)
-    block(RoosterModuleBuilder(plugin, services, cache))
+    val builder = RoosterModuleBuilder(plugin, services, cache)
+    block(builder)
+    builder.afterHooks.forEach { it() }
 }
 
 class RoosterModuleBuilder(
     val plugin: JavaPlugin,
     val services: RoosterServices,
     val cache: RoosterCache<String, Any>
-)
+) {
+    val afterHooks: MutableList<() -> Unit> = mutableListOf()
+}

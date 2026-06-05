@@ -1,7 +1,9 @@
 package dev.rooster.core.util
 
+import dev.rooster.core.message.Message
 import net.kyori.adventure.text.TextComponent
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 
@@ -70,6 +72,23 @@ class TranslatableItemStack {
 
         this.descriptionReplacements = descriptionReplacements
     }
+}
+
+fun createItem(
+    material: Material,
+    name: Message,
+    player: Player,
+    description: List<Message>? = null,
+    amount: Int = 1,
+    additional: (ItemMeta) -> Unit = {}
+): ItemStack {
+    val item = ItemStack(material, amount)
+    val itemMeta = item.itemMeta
+    itemMeta.displayName(name.resolve(player))
+    if (description != null) itemMeta.lore(description.map { it.resolve(player) })
+    additional(itemMeta)
+    item.itemMeta = itemMeta
+    return item
 }
 
 fun createItem(
